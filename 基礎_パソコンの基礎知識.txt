@@ -1,0 +1,4 @@
+CPU:Intel(R) Core(TM) i5 CPU M 430 @2.27GHz 2.27GHz
+ÉÅÉÇÉä:4GB
+HDD:419GB
+OS:Windows10 Home
