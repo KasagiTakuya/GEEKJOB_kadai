@@ -39,8 +39,8 @@ public class DB1 extends HttpServlet {
         
         try
         {
-            Class.forName("com.mysql.jdbc.Driver").newInstance();
-            db_con = DriverManager.getConnection("jdbc:mysql://localhost:3306/kadai9","3gita46","teppei46");
+            Class.forName("com.mysql.jdbc.Driver").newInstance();                  //念のため提出用に伏せてます
+            db_con = DriverManager.getConnection("jdbc:mysql://localhost:3306/kadai9","","");
             db_con.close();
         }catch (SQLException e_sql){
             out.println("接続時にエラーが発生しました"+e_sql.toString());
