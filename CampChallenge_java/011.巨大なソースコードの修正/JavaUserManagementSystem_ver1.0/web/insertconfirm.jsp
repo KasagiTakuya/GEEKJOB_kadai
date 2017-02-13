@@ -20,7 +20,9 @@
         自己紹介:<%= hs.getAttribute("comment")%><br>
         上記の内容で登録します。よろしいですか？
         <form action="insertresult" method="POST">
-            <input type="submit" name="yes" value="はい">
+            <input type="submit" name="yes" value="はい"> 
+     <%  //はいならリザルト用に直リンク禁止用セッションに登録
+         session.setAttribute("acc", (int) (Math.random() * 1000)); %>
         </form>
     <% }else{ %>
         <h1>入力が不完全です</h1>

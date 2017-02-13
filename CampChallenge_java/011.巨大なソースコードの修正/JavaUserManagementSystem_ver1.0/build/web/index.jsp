@@ -12,6 +12,5 @@
         付随して修正や削除を行うことができます</h3><br>
     <a href="insert">新規登録</a><br>
     <a href="" >検索(修正・削除)</a><br>
-    <%=JumsHelper.getInstance().home()%>
 </body>
 </html>
