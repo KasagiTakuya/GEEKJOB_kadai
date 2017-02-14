@@ -53,6 +53,9 @@ public class InsertConfirm extends HttpServlet {
             session.setAttribute("comment", comment);
             System.out.println("Session updated!!");
             
+            //リザルト用に直リンク禁止用セッションに登録
+            session.setAttribute("bc", (int) (Math.random() * 1000));
+            
             request.getRequestDispatcher("/insertconfirm.jsp").forward(request, response);
         }catch(Exception e){
             request.setAttribute("error", e.getMessage());

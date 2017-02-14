@@ -11,6 +11,9 @@ import java.sql.PreparedStatement;
 import java.sql.Connection;
 import java.sql.SQLException;
 import java.sql.Timestamp;
+import java.sql.Date;
+import java.text.SimpleDateFormat;
+
 public class UserDataDAO {
     
     //インスタンスオブジェクトを返却させてコードの簡略化
@@ -30,7 +33,14 @@ public class UserDataDAO {
             con = DBManager.getConnection();
             st =  con.prepareStatement("INSERT INTO user_t(name,birthday,tell,type,comment,newDate) VALUES(?,?,?,?,?,?)");
             st.setString(1, ud.getName());
-            st.setDate(2, new java.sql.Date(System.currentTimeMillis()));//指定のタイムスタンプ値からSQL格納用のDATE型に変更
+            
+            //文字列に変換してから再度Date型に変換
+            SimpleDateFormat day = new SimpleDateFormat("yyyy-MM-dd");
+            String date = day.format(ud.getBirthday());
+            Date birth = Date.valueOf(date);
+            st.setDate(2, birth);
+            //↓保守用
+            //st.setDate(2, new java.sql.Date(System.currentTimeMillis()));//指定のタイムスタンプ値からSQL格納用のDATE型に変更
             st.setString(3, ud.getTell());
             st.setInt(4, ud.getType());
             st.setString(5, ud.getComment());

@@ -66,7 +66,10 @@ if(hs.getAttribute("name")!=null){out.print(hs.getAttribute("name"));}
       out.write("\n");
       out.write("        生年月日:　\n");
       out.write("        <select name=\"year\">\n");
-      out.write("            <option value=\"\">");
+      out.write("            <option value=\"");
+if(hs.getAttribute("month")!=null){out.print(hs.getAttribute("year"));}
+      out.write('"');
+      out.write('>');
 if(hs.getAttribute("year")!=null){out.print(hs.getAttribute("year"));}else out.println("----");
       out.write("</option>\n");
       out.write("            ");
@@ -84,14 +87,20 @@ if(hs.getAttribute("year")!=null){out.print(hs.getAttribute("year"));}else out.p
       out.write("\n");
       out.write("        </select>年\n");
       out.write("        <select name=\"month\">\n");
-      out.write("            <option value=\"\">");
+      out.write("            <option value=\"");
+if(hs.getAttribute("month")!=null){out.print(hs.getAttribute("month"));}
+      out.write('"');
+      out.write('>');
 if(hs.getAttribute("month")!=null){out.print(hs.getAttribute("month"));}else out.println("--");
       out.write("</option>\n");
       out.write("            ");
 
             for(int i = 1; i<=12; i++){ 
       out.write("\n");
-      out.write("            <option value=\"5\">");
+      out.write("            <option value=\"");
+      out.print(i);
+      out.write('"');
+      out.write('>');
       out.print(i);
       out.write("</option>\n");
       out.write("            ");
@@ -99,7 +108,10 @@ if(hs.getAttribute("month")!=null){out.print(hs.getAttribute("month"));}else out
       out.write("\n");
       out.write("        </select>月\n");
       out.write("        <select name=\"day\">\n");
-      out.write("            <option value=\"\">");
+      out.write("            <option value=\"");
+if(hs.getAttribute("day")!=null){out.print(hs.getAttribute("day"));}
+      out.write('"');
+      out.write('>');
 if(hs.getAttribute("day")!=null){out.print(hs.getAttribute("day"));}else out.println("--");
       out.write("</option>\n");
       out.write("            ");

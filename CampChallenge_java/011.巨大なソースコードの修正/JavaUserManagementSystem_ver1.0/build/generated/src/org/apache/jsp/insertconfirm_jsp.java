@@ -58,7 +58,9 @@ public final class insertconfirm_jsp extends org.apache.jasper.runtime.HttpJspBa
       out.write("    </head>\n");
       out.write("    <body>\n");
       out.write("    ");
- if(!hs.getAttribute("name").equals("")){ 
+ if(!hs.getAttribute("name").equals("")&&!hs.getAttribute("year").equals("")&&!hs.getAttribute("month").equals("")&&
+          !hs.getAttribute("day").equals("")&&!hs.getAttribute("type").equals("")&&!hs.getAttribute("tell").equals("")&&
+          !hs.getAttribute("comment").equals("")){ 
       out.write("\n");
       out.write("        <h1>登録確認</h1>\n");
       out.write("        名前:");
@@ -78,12 +80,23 @@ public final class insertconfirm_jsp extends org.apache.jasper.runtime.HttpJspBa
       out.write("<br>\n");
       out.write("        上記の内容で登録します。よろしいですか？\n");
       out.write("        <form action=\"insertresult\" method=\"POST\">\n");
-      out.write("            <input type=\"submit\" name=\"yes\" value=\"はい\">\n");
+      out.write("             <input type=\"hidden\" name=\"bc\"  value=\"");
+      out.print( hs.getAttribute("bc"));
+      out.write("\">\n");
+      out.write("            <input type=\"submit\" name=\"yes\" value=\"はい\"> \n");
       out.write("        </form>\n");
       out.write("    ");
  }else{ 
       out.write("\n");
       out.write("        <h1>入力が不完全です</h1>\n");
+      out.write("        ");
+if(hs.getAttribute("name").equals("")){out.println("名前が入力されていません"+"<br>");} 
+        if(hs.getAttribute("year").equals("")||hs.getAttribute("month").equals("")||hs.getAttribute("day").equals(""))
+            {out.println("生年月日が入力されていません"+"<br>");} 
+        if(hs.getAttribute("type").equals("")){out.println("種別が入力されていません"+"<br>");}
+        if(hs.getAttribute("tell").equals("")){out.println("電話番号が入力されていません"+"<br>");}
+        if(hs.getAttribute("comment").equals("")){out.println("自己紹介が入力されていません"+"<br>");} 
+      out.write("\n");
       out.write("    ");
  } 
       out.write("\n");
@@ -91,7 +104,8 @@ public final class insertconfirm_jsp extends org.apache.jasper.runtime.HttpJspBa
       out.write("            <input type=\"submit\" name=\"no\" value=\"登録画面に戻る\">\n");
       out.write("        </form>\n");
       out.write("        ");
-      out.print(JumsHelper.getInstance().home());
+      out.print(////もしかしたらリンク要らない
+          JumsHelper.getInstance().home());
       out.write("\n");
       out.write("    </body>\n");
       out.write("</html>\n");

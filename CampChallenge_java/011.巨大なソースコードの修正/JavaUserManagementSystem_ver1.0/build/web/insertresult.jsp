@@ -19,5 +19,8 @@
         自己紹介:<%= hs.getAttribute("comment")%><br>
         以上の内容で登録しました。<br>
         <%=JumsHelper.getInstance().home()%>
+        
+       
+                               
     </body>
 </html>

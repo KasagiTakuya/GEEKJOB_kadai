@@ -3,6 +3,7 @@ package org.apache.jsp;
 import javax.servlet.*;
 import javax.servlet.http.*;
 import javax.servlet.jsp.*;
+import javax.servlet.http.HttpSession;
 import jums.JumsHelper;
 
 public final class index_jsp extends org.apache.jasper.runtime.HttpJspBase
@@ -44,6 +45,7 @@ public final class index_jsp extends org.apache.jasper.runtime.HttpJspBase
 
       out.write("\n");
       out.write("\n");
+      out.write("\n");
       out.write("<!DOCTYPE html>\n");
       out.write("<html lang=\"ja\">\n");
       out.write("<head>\n");
@@ -56,8 +58,8 @@ public final class index_jsp extends org.apache.jasper.runtime.HttpJspBase
       out.write("        付随して修正や削除を行うことができます</h3><br>\n");
       out.write("    <a href=\"insert\">新規登録</a><br>\n");
       out.write("    <a href=\"\" >検索(修正・削除)</a><br>\n");
-      out.write("    ");
-      out.print(JumsHelper.getInstance().home());
+      out.write("       ");
+session.invalidate();
       out.write("\n");
       out.write("</body>\n");
       out.write("</html>\n");

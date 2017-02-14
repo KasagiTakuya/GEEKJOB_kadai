@@ -77,6 +77,9 @@ public final class insertresult_jsp extends org.apache.jasper.runtime.HttpJspBas
       out.write("        ");
       out.print(JumsHelper.getInstance().home());
       out.write("\n");
+      out.write("        \n");
+      out.write("       \n");
+      out.write("                               \n");
       out.write("    </body>\n");
       out.write("</html>\n");
     } catch (Throwable t) {

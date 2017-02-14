@@ -35,21 +35,21 @@ public class UserDataBeans {
            }
            
            public String getmonth(){
-           return year;
+           return month;
            }
            public void setmonth(String month){
            this.month = month;
            }
            
            public String getday(){
-           return year;
+           return day;
            }
            public void setday(String day){
-           this.year = day;
+           this.day = day;
            }
            
            public String gettype(){
-           return year;
+           return type;
            }
            public void settype(String type){
            this.type = type;

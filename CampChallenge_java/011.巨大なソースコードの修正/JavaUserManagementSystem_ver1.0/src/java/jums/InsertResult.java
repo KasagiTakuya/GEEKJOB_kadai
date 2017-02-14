@@ -2,7 +2,9 @@ package jums;
 
 import java.io.IOException;
 import java.sql.SQLException;
+import java.text.SimpleDateFormat;
 import java.util.Calendar;
+import java.util.Date;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
@@ -34,22 +36,39 @@ public class InsertResult extends HttpServlet {
         
         try{
             request.setCharacterEncoding("UTF-8");//セッションに格納する文字コードをUTF-8に変更
-            String accesschk = request.getParameter("acc");
-            if(accesschk ==null || (Integer)session.getAttribute("acc")!=Integer.parseInt(accesschk)){
+            String accesschk = request.getParameter("bc");
+            if(accesschk ==null || (Integer)session.getAttribute("bc")!=Integer.parseInt(accesschk)){
                 throw new Exception("不正なアクセスです");
             }
             
             //ユーザー情報に対応したJavaBeansオブジェクトに格納していく
             UserDataDTO userdata = new UserDataDTO();
+            
             userdata.setName((String)session.getAttribute("name"));
+            
+            //年月日を組み合わせてCalenar型からDate型に変換する処理
             Calendar birthday = Calendar.getInstance();
-            userdata.setBirthday(birthday.getTime());
+            Integer month = Integer.parseInt((String)session.getAttribute("month")) - 1;
+            birthday.set(Integer.parseInt((String)session.getAttribute("year")),month,Integer.parseInt((String)session.getAttribute("day")));
+            Date birth = birthday.getTime();
+            
+            userdata.setBirthday(birth);
             userdata.setType(Integer.parseInt((String)session.getAttribute("type")));
             userdata.setTell((String)session.getAttribute("tell"));
             userdata.setComment((String)session.getAttribute("comment"));
             
             //DBへデータの挿入
             UserDataDAO .getInstance().insert(userdata);
+            
+            UserDataBeans udata = new UserDataBeans();         
+            
+            udata.setName((String)session.getAttribute("name"));
+            udata.setyear((String)session.getAttribute("year"));
+            udata.setmonth((String)session.getAttribute("month"));
+            udata.setday((String)session.getAttribute("day"));
+            udata.settype((String)session.getAttribute("type"));
+            udata.settell((String)session.getAttribute("tell"));
+            udata.setcomment((String)session.getAttribute("comment"));
             
             request.getRequestDispatcher("/insertresult.jsp").forward(request, response);
         }catch(Exception e){

@@ -12,7 +12,7 @@
     </head>
     <body>
     <% if(!hs.getAttribute("name").equals("")&&!hs.getAttribute("year").equals("")&&!hs.getAttribute("month").equals("")&&
-          !hs.getAttribute("day").equals("")&&!hs.getAttribute("type").equals("")&&!hs.getAttribute("tell").equals("")&&
+          !hs.getAttribute("day").equals("")&&hs.getAttribute("type")!=null&&!hs.getAttribute("tell").equals("")&&
           !hs.getAttribute("comment").equals("")){ %>
         <h1>登録確認</h1>
         名前:<%= hs.getAttribute("name")%><br>
@@ -22,23 +22,21 @@
         自己紹介:<%= hs.getAttribute("comment")%><br>
         上記の内容で登録します。よろしいですか？
         <form action="insertresult" method="POST">
+             <input type="hidden" name="bc"  value="<%= hs.getAttribute("bc")%>">
             <input type="submit" name="yes" value="はい"> 
-     <%  //はいならリザルト用に直リンク禁止用セッションに登録
-         session.setAttribute("acc", (int) (Math.random() * 1000)); %>
         </form>
     <% }else{ %>
         <h1>入力が不完全です</h1>
         <%if(hs.getAttribute("name").equals("")){out.println("名前が入力されていません"+"<br>");} 
         if(hs.getAttribute("year").equals("")||hs.getAttribute("month").equals("")||hs.getAttribute("day").equals(""))
-            {out.println("生年月日が入力されていません"+"<br>");} 
-        if(hs.getAttribute("type").equals("")){out.println("種別が入力されていません"+"<br>");}
+          {out.println("生年月日が入力されていません"+"<br>");} 
+        if(hs.getAttribute("type")==null){out.println("種別が入力されていません"+"<br>");}
         if(hs.getAttribute("tell").equals("")){out.println("電話番号が入力されていません"+"<br>");}
         if(hs.getAttribute("comment").equals("")){out.println("自己紹介が入力されていません"+"<br>");} %>
     <% } %>
         <form action="insert" method="POST">
             <input type="submit" name="no" value="登録画面に戻る">
         </form>
-        <%=////もしかしたらリンク要らない
-          JumsHelper.getInstance().home()%>
+        <%=JumsHelper.getInstance().home()%>
     </body>
 </html>
