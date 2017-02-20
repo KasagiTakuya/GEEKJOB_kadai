@@ -58,8 +58,10 @@ public final class index_jsp extends org.apache.jasper.runtime.HttpJspBase
       out.write("        付随して修正や削除を行うことができます</h3><br>\n");
       out.write("    <a href=\"insert\">新規登録</a><br>\n");
       out.write("    <a href=\"\" >検索(修正・削除)</a><br>\n");
+      out.write("       \n");
       out.write("       ");
-session.invalidate();
+//トップ画面に来たらセッションがリセットされる
+         session.invalidate();
       out.write("\n");
       out.write("</body>\n");
       out.write("</html>\n");

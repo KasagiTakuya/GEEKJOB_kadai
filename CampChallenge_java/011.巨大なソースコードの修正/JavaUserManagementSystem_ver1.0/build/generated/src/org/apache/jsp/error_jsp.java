@@ -58,6 +58,7 @@ public final class error_jsp extends org.apache.jasper.runtime.HttpJspBase
       out.write("        ");
       out.print(JumsHelper.getInstance().home());
       out.write("\n");
+      out.write("        ああああああああ\n");
       out.write("    </body>\n");
       out.write("</html>\n");
     } catch (Throwable t) {

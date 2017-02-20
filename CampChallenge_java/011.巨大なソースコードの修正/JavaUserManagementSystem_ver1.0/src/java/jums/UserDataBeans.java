@@ -5,11 +5,14 @@
  */
 package jums;
 
+
+
 /**
  *
  * @author PCUser
  */
-public class UserDataBeans {
+public class UserDataBeans{
+    
     
            private String name;
            private String year;
@@ -20,10 +23,21 @@ public class UserDataBeans {
            private String tell;
            private String comment;
            
-           public String getName(){
+        public UserDataBeans(){
+           this.name = "";
+           this.year = "";
+           this.month = "";
+           this.day = "";
+           this.type = "";
+           this.tell = "";
+           this.comment = "";
+                             }
+
+           
+           public String getname(){
            return name;
            }
-           public void setName(String name){
+           public void setname(String name){
            this.name = name;
            }
            

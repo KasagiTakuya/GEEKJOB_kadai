@@ -42,34 +42,27 @@ public class InsertResult extends HttpServlet {
             }
             
             //ユーザー情報に対応したJavaBeansオブジェクトに格納していく
-            UserDataDTO userdata = new UserDataDTO();
             
-            userdata.setName((String)session.getAttribute("name"));
+            UserDataDTO userdata = new UserDataDTO();
+             
+            UserDataBeans udata = (UserDataBeans)session.getAttribute("udata");
+            
+            userdata.setName(udata.getname());
             
             //年月日を組み合わせてCalenar型からDate型に変換する処理
             Calendar birthday = Calendar.getInstance();
-            Integer month = Integer.parseInt((String)session.getAttribute("month")) - 1;
-            birthday.set(Integer.parseInt((String)session.getAttribute("year")),month,Integer.parseInt((String)session.getAttribute("day")));
+            Integer month = Integer.parseInt(udata.getmonth()) - 1;
+            birthday.set(Integer.parseInt(udata.getyear()),month,Integer.parseInt(udata.getday()));
             Date birth = birthday.getTime();
             
             userdata.setBirthday(birth);
-            userdata.setType(Integer.parseInt((String)session.getAttribute("type")));
-            userdata.setTell((String)session.getAttribute("tell"));
-            userdata.setComment((String)session.getAttribute("comment"));
+            userdata.setType(Integer.parseInt(udata.gettype()));
+            userdata.setTell(udata.gettell());
+            userdata.setComment(udata.getcomment());
             
             //DBへデータの挿入
             UserDataDAO .getInstance().insert(userdata);
-            
-            UserDataBeans udata = new UserDataBeans();         
-            
-            udata.setName((String)session.getAttribute("name"));
-            udata.setyear((String)session.getAttribute("year"));
-            udata.setmonth((String)session.getAttribute("month"));
-            udata.setday((String)session.getAttribute("day"));
-            udata.settype((String)session.getAttribute("type"));
-            udata.settell((String)session.getAttribute("tell"));
-            udata.setcomment((String)session.getAttribute("comment"));
-            
+             
             request.getRequestDispatcher("/insertresult.jsp").forward(request, response);
         }catch(Exception e){
             //データ挿入に失敗したらエラーページにエラー文を渡して表示

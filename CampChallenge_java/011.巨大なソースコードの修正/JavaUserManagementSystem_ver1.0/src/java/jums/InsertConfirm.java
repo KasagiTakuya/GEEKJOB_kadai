@@ -1,6 +1,8 @@
 package jums;
 
 import java.io.IOException;
+import javax.servlet.RequestDispatcher;
+import javax.servlet.ServletContext;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
@@ -26,14 +28,16 @@ public class InsertConfirm extends HttpServlet {
      */
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
+        
+        HttpSession session = request.getSession();
+        
         try{
-            HttpSession session = request.getSession();
             request.setCharacterEncoding("UTF-8");//セッションに格納する文字コードをUTF-8に変更
             String accesschk = request.getParameter("ac");
             if(accesschk ==null || (Integer)session.getAttribute("ac")!=Integer.parseInt(accesschk)){
                 throw new Exception("不正なアクセスです");
             }
-            
+
             //フォームからの入力を取得
             String name = request.getParameter("name");
             String year = request.getParameter("year");
@@ -43,6 +47,21 @@ public class InsertConfirm extends HttpServlet {
             String tell = request.getParameter("tell");
             String comment = request.getParameter("comment");
 
+            
+            UserDataBeans udata = new UserDataBeans();         
+            
+            udata.setname(name);
+            udata.setyear(year);
+            udata.setmonth(month);
+            udata.setday(day);
+            udata.settype(type);
+            udata.settell(tell);
+            udata.setcomment(comment);
+            
+            session.setAttribute("udata",udata);
+            
+            
+           
             //セッションに格納
             session.setAttribute("name", name);
             session.setAttribute("year", year);
@@ -53,15 +72,18 @@ public class InsertConfirm extends HttpServlet {
             session.setAttribute("comment", comment);
             System.out.println("Session updated!!");
             
+            
+            
             //リザルト用に直リンク禁止用セッションに登録
             session.setAttribute("bc", (int) (Math.random() * 1000));
             
-            request.getRequestDispatcher("/insertconfirm.jsp").forward(request, response);
+            ServletContext servletContext = getServletContext();
+            RequestDispatcher requestDispatcher = servletContext.getRequestDispatcher("/insertconfirm.jsp");
+            requestDispatcher.forward( request, response );
         }catch(Exception e){
             request.setAttribute("error", e.getMessage());
             request.getRequestDispatcher("/error.jsp").forward(request, response);
-        }
-            
+        } 
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
