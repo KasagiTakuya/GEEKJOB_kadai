@@ -1,0 +1,16 @@
+2/22 
+修正箇所のリストアップ
+1.updateteresult.jspに結果を表示させる、詳細画面へ戻るボタンを設置する
+2.ResultDetail.javaのID表示を直す
+3.update.java未実装
+4.delete.java未実装
+5.deleteresult.jspに戻るボタン設置
+6.searchresult.jspに何も入力が無ければ全件表示する処理を実装させる
+7.resultdetail.jspに検索画面へ戻るボタン設置
+8.searchresult.javaにID昇順で表示させる処理を実装(1人しか表示されない)
+9.updateresult.javaの処理未実装。接続が失敗したときの処理も
+10.deleteresult.java未実装
+
+3,4,6,8,9,10は1日で2つずつ処理する
+戻るボタン設置は全て合わせて3時間程度で
+2は4時間程度で
