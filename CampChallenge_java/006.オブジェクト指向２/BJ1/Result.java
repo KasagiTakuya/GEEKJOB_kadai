@@ -43,20 +43,21 @@ public class Result extends HttpServlet {
             Dealer Dea = new Dealer();
             User Use = new User();
             
-            //Dea.dealの結果をぶん投げてドロー
-            //投げたら結果をリターンしてくれる。
+            /*Dea.dealの結果を投げてドロー
+            投げたら結果をリターンしてくれる。
+            dealメソッドを呼び出して2枚引いてそのままセットしているイメージ*/
             Dea.setCard(Dea.deal());
             Use.setCard(Dea.deal());
-            
-            
+             
             //trueの間は引き続ける
-                while(Dea.checkSum() == true) {
-                    //意味としては、1回ずつ繰り返す。1回ずつぶん投げて結果を求める
+            while(Dea.checkSum() == true) {
+                    //意味としては、1回ずつ繰り返す。1回ずつ投げて結果を求める
                 Dea.setCard(Dea.hit());
                 if(Dea.checkSum() == false) {
                     break;
                 }
             }
+            //ユーザーのカードで同じことをしている
             while(Use.checkSum() == true) {
                 Use.setCard(Dea.hit());
                 if(Use.checkSum() == false) {
@@ -76,7 +77,6 @@ public class Result extends HttpServlet {
             
             String Result = " ";
             
-            
             //21以下で同点ならディーラーの勝利
             if(Dea.open()<=21&Dea.open() >=Use.open()){
             Result = "Dealer WIN...";
@@ -94,19 +94,11 @@ public class Result extends HttpServlet {
             Result = "--DROW--";
             }
             
-            
-            
-            
             //合計値表示
             out.println("ディーラーの合計:"+Dea.open()+DeaBUR+"<br>");
             out.println("あなたの合計:"+Use.open()+UseBUR+"<br><br>");
             out.println(Result);
             
-           
-            
-                      
-            
-           
             out.println("</body>");
             out.println("</html>");
         }
