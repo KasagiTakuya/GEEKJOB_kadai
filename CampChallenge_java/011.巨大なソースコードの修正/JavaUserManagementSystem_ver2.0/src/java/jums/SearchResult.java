@@ -27,17 +27,18 @@ public class SearchResult extends HttpServlet {
             throws ServletException, IOException {
         try{
             request.setCharacterEncoding("UTF-8");//リクエストパラメータの文字コードをUTF-8に変更
-        
+            
             //フォームからの入力を取得して、JavaBeansに格納
             UserDataBeans udb = new UserDataBeans();
             udb.setName(request.getParameter("name"));
             udb.setYear(request.getParameter("year"));
             udb.setType(request.getParameter("type"));
-
+            
             //DTOオブジェクトにマッピング。DB専用のパラメータに変換
             UserDataDTO searchData = new UserDataDTO();
             udb.UD2DTOMapping(searchData);
-
+            
+            //リストをjavabeansに作ると良い
             UserDataDTO resultData = UserDataDAO .getInstance().search(searchData);
             request.setAttribute("resultData", resultData);
             
@@ -46,9 +47,7 @@ public class SearchResult extends HttpServlet {
             //何らかの理由で失敗したらエラーページにエラー文を渡して表示。想定は不正なアクセスとDBエラー
             request.setAttribute("error", e.getMessage());
             request.getRequestDispatcher("/error.jsp").forward(request, response);
-        }
-        
-        
+        } 
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">

@@ -13,7 +13,7 @@
     </head>
     <body>
     <h1>削除確認</h1>
-    以下の内容を削除します。よろしいですか？
+    以下の内容を削除します。よろしいですか？<br>
     名前:<%= udd.getName()%><br>
     生年月日:<%= udd.getBirthday()%><br>
     種別:<%= udd.getType()%><br>
@@ -23,9 +23,11 @@
     
     <form action="DeleteResult" method="POST">
       <input type="submit" name="YES" value="はい"style="width:100px">
+      <input type="hidden" name="UserID" value="<%=udd.getUserID()%>">
     </form><br>
     <form action="ResultDetail" method="POST">
-      <input type="submit" name="NO" value="詳細画面に戻る"style="width:100px">
+      <input type="submit" name="NO" value="詳細画面に戻る"style="width:130px">
+      <input type="hidden" name="id" value="<%=udd.getUserID()%>">
     </form>
     </body>
 </html>

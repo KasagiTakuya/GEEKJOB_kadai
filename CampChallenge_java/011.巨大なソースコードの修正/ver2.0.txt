@@ -1,15 +1,15 @@
 2/22 
 修正箇所のリストアップ
-1.updateteresult.jspに結果を表示させる、詳細画面へ戻るボタンを設置する
+1.updateteresult.jspに結果を表示させる、詳細画面へ戻るボタンを設置する　完了
 2.ResultDetail.javaのID表示を直す　完了
-3.update.java未実装
-4.delete.java未実装
-5.deleteresult.jspに戻るボタン設置
+3.update.java未実装　完了
+4.delete.java未実装　完了
+5.deleteresult.jspに戻るボタン設置　完了
 6.searchresult.jspに何も入力が無ければ全件表示する処理を実装させる
-7.resultdetail.jspに検索画面へ戻るボタン設置
+7.resultdetail.jspに検索画面へ戻るボタン設置　完了
 8.searchresult.javaにID昇順で表示させる処理を実装(1人しか表示されない)
-9.updateresult.javaの処理未実装。接続が失敗したときの処理も
-10.deleteresult.java未実装
+9.updateresult.javaの処理未実装。接続が失敗したときの処理も　完了
+10.deleteresult.java未実装　完了
 
 3,4,6,8,9,10は1日で2つずつ処理する
 戻るボタン設置は全て合わせて3時間程度で
@@ -20,3 +20,36 @@
 2/22
 各jspにボタン設置　詳細画面に戻ったらnullになるので後々修正が必要
 2.のIDが2で固定されている不具合はクエリストリングで修正
+
+3/2
+再開
+
+3/3
+4.delete.java実装
+
+10.deleteresult.java実装
+delete処理をUserDataDAOに追加
+
+3.update.java実装
+1.update.jspに値を予め表示する処理実装
+
+UpdateResultの処理途中
+
+3/6
+9.UpdateResult.javaとupdateteresult.jspに結果を表示させる処理実装
+ただし、接続に失敗したときの処理は未実装
+
+他画面から詳細画面に戻った際にもデータを表示させる処理実装
+(クエリストリングと同じ"id"でデータを送信しているのでやり方として正しいかどうか・・・)
+
+
+3/8
+途中ですが提出させていただきます。
+全件表示はArrayList使いそうだなというイメージはあるのですが、どうやったらいいのか分からず・・・。
+
+分かる範囲で出来ていない事
+・search画面で未入力の場合SearchResult画面に全件表示する処理
+・名前だけ、誕生日だけ、種別だけで検索する処理
+・他画面からSearchResultに戻ってきたときに検索結果を表示する処理
+・Update画面で未入力でも次の画面に進めて空欄のまま登録されてしまうのを防止する処理
+・セッションなどで直リンクを防止する処理

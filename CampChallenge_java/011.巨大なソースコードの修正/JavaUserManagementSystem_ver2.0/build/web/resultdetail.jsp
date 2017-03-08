@@ -21,9 +21,16 @@
         登録日時:<%= udd.getNewDate()%><br>
         <form action="Update" method="POST">
         <input type="submit" name="update" value="変更"style="width:100px">
+        <input type="hidden" name="UserID" value="<%=udd.getUserID()%>">
         </form>
         <form action="Delete" method="POST">
         <input type="submit" name="delete" value="削除"style="width:100px">
+        <input type="hidden" name="UserID" value="<%=udd.getUserID()%>">
+        </form>
+        <br>
+        <form action="SearchResult" method="POST">
+        <input type="submit" name="search" value="検索結果画面に戻る"style="width:150px">
+        <input type="hidden" name="id" value="<%=udd.getUserID()%>">
         </form>
     </body>
 </html>

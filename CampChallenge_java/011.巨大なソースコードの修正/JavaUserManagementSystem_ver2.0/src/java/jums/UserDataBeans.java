@@ -9,7 +9,7 @@ import java.util.Calendar;
  * DTOへの変換メソッド、入力チェックリストを出力するメソッドも準備されている←ちょっと仕事しすぎかも
  * @author hayashi-s
  */
-public class UserDataBeans implements Serializable{
+public class UserDataBeans {
     private String name;
     private int year;
     private int month;

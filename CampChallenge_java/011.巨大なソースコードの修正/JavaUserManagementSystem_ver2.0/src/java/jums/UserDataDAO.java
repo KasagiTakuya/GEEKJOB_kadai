@@ -63,7 +63,6 @@ public class UserDataDAO {
         try{
             con = DBManager.getConnection();
             
-            //
             String sql = "SELECT * FROM user_t";
             boolean flag = false;
             if (!ud.getName().equals("")) {
@@ -91,15 +90,16 @@ public class UserDataDAO {
             st.setInt(3, ud.getType());
             
             ResultSet rs = st.executeQuery();
-            rs.next();
             UserDataDTO resultUd = new UserDataDTO();
+            
+            while(rs.next()){
             resultUd.setUserID(rs.getInt(1));
             resultUd.setName(rs.getString(2));
             resultUd.setBirthday(rs.getDate(3));
             resultUd.setTell(rs.getString(4));
             resultUd.setType(rs.getInt(5));
             resultUd.setComment(rs.getString(6));
-            resultUd.setNewDate(rs.getTimestamp(7));
+            resultUd.setNewDate(rs.getTimestamp(7));}
             
             System.out.println("search completed");
 
@@ -146,6 +146,63 @@ public class UserDataDAO {
             System.out.println("searchByID completed");
 
             return resultUd;
+        }catch(SQLException e){
+            System.out.println(e.getMessage());
+            throw new SQLException(e);
+        }finally{
+            if(con != null){
+                con.close();
+            }
+        }
+
+    }
+    
+    //新たに追加されたdelete用メソッド
+    public void delete(UserDataDTO ud) throws SQLException{
+        Connection con = null;
+        PreparedStatement st = null;
+        try{
+            con = DBManager.getConnection();            
+            st =  con.prepareStatement("DELETE FROM user_t WHERE userID = ?");
+            st.setInt(1, ud.getUserID());
+            st.executeUpdate();
+            
+            System.out.println("Delete completed");
+  
+        }catch(SQLException e){
+            System.out.println(e.getMessage());
+            throw new SQLException(e);
+        }finally{
+            if(con != null){
+                con.close();
+            }
+        }
+
+    }
+    
+    //新たに追加されたupdate用メソッド
+    public void update(UserDataDTO ud) throws SQLException{
+        Connection con = null;
+        PreparedStatement st = null;
+        try{
+            con = DBManager.getConnection();
+
+            String sql = "UPDATE user_t SET name = ?,birthday = ?,tell = ?,type = ?,comment = ?,newDate = ? WHERE userID = ?";
+            
+            st =  con.prepareStatement(sql);
+           
+            st.setString(1, ud.getName());
+            st.setDate(2, new java.sql.Date(ud.getBirthday().getTime()));//指定のタイムスタンプ値からSQL格納用のDATE型に変更
+            st.setString(3, ud.getTell());
+            st.setInt(4, ud.getType());
+            st.setString(5, ud.getComment());
+            st.setTimestamp(6, new Timestamp(System.currentTimeMillis()));
+            st.setInt(7, ud.getUserID());
+            
+            st.executeUpdate();
+
+            System.out.println("update completed");
+           
         }catch(SQLException e){
             System.out.println(e.getMessage());
             throw new SQLException(e);

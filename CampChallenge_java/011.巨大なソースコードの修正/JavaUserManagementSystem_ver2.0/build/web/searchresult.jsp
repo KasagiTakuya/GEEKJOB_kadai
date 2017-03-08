@@ -1,5 +1,5 @@
 <%@page import="jums.JumsHelper"
-        import="jums.UserDataDTO" %>
+        import="jums.UserDataDTO"%>
 <%
     JumsHelper jh = JumsHelper.getInstance();
     UserDataDTO udd = (UserDataDTO)request.getAttribute("resultData");
